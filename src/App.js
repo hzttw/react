@@ -1,13 +1,10 @@
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "./mini-react-router";
+import { BrowserRouter as Router, Routes, Route,Link } from "./mini-react-router";
 // import {
 //   BrowserRouter as Router,
 //   Routes,
 //   Route,
+// Link
 // } from "react-router-dom";
 
 function App() {
@@ -15,8 +12,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path="product" element={<Product />}>
+            <Route path="product" element={<Product />}></Route>
           </Route>
         </Routes>
       </Router>
@@ -26,6 +24,14 @@ function App() {
 
 export default App;
 
+function Layout(porps) {
+  return (
+    <div className="border">
+      <Link to="/">首页</Link>
+      <Link to="/product">商品</Link>
+    </div>
+  );
+}
 function Home() {
   return (
     <div>
