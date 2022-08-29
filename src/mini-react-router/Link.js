@@ -1,5 +1,16 @@
-export default function Link({to, children }) {
-  console.log('link',to);
-  return <a href={to}>{children}</a>;
+import { useNavigate } from "./hooks";
 
+export default function Link({ to, children }) {
+  const navigate = useNavigate()
+  const handle = (e) => {
+    //这里阻止原生事件，a标签的href 会刷新页面
+    e.preventDefault();
+    //这里将跳转交给navigate来处理
+    navigate(to)
+  };
+  return (
+    <a href={to} onClick={handle}>
+      {children}
+    </a>
+  );
 }
