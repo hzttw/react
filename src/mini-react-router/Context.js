@@ -1,5 +1,5 @@
 import React from "react";
 const NavigationContext = React.createContext();
+const RouteContext = React.createContext();
 
-console.log("NavigationContext",NavigationContext);
-export { NavigationContext };
+export { NavigationContext,RouteContext };

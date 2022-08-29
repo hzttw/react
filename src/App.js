@@ -1,5 +1,11 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route,Link } from "./mini-react-router";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Outlet,
+} from "./mini-react-router";
 // import {
 //   BrowserRouter as Router,
 //   Routes,
@@ -29,6 +35,7 @@ function Layout(porps) {
     <div className="border">
       <Link to="/">首页</Link>
       <Link to="/product">商品</Link>
+      <Outlet></Outlet>
     </div>
   );
 }
