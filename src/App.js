@@ -1,10 +1,11 @@
+// import { useParams } from "react-router-dom";
 import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
-  Outlet,
+  Outlet,useNavigate,useParams
 } from "./mini-react-router";
 // import {
 //   BrowserRouter as Router,
@@ -20,7 +21,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path="product" element={<Product />}></Route>
+            <Route path="product" element={<Product />}>
+              <Route path=":id" element={<ProductDetail />}></Route>
+            </Route>
           </Route>
         </Routes>
       </Router>
@@ -51,6 +54,19 @@ function Product() {
   return (
     <div>
       <h1>Product</h1>
+      <Link to='/product/123'>商品</Link>
+      <Outlet></Outlet>
+    </div>
+  );
+}
+function ProductDetail() {
+  let navigate = useNavigate();
+  const params = useParams();
+  return (
+    <div>
+      <h1>ProductDetail</h1>
+      <p>{params.id}</p>
+      <button onClick={() => navigate("/")}>go home</button>
     </div>
   );
 }

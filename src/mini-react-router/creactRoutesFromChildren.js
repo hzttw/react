@@ -15,7 +15,6 @@ export default function creactRoutesFromChildren(children) {
     }
     routes.push(route);
   });
-  console.log(routes);
   return routes;
   
 }
