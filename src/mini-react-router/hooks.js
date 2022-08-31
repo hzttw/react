@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { matchRoutes } from "react-router-dom";
 import { NavigationContext, RouteContext } from "./Context";
 // import Outlet from "./Outlet";
@@ -40,7 +40,20 @@ export function useRoutes(routes) {
 export function useNavigate() {
   //跳转
   const { naviagtor } = useContext(NavigationContext);
-  return naviagtor.push;
+  const navigate = useCallback(
+    (to, options = {}) => {
+      if (typeof to === "number") {
+        naviagtor.go(to);
+        return;
+      }
+      (!!options.replace ? naviagtor.replace : naviagtor.push)(
+        to,
+        options.state
+      );
+    },
+    [naviagtor]
+  );
+  return navigate;
 }
 
 export function useLocation() {
@@ -71,5 +84,5 @@ function renderMetches(matches) {
 export function useParams() {
   const { matches } = useContext(RouteContext);
   const routeMatch = matches[matches.length - 1];
-  return routeMatch ? routeMatch.params : {}
+  return routeMatch ? routeMatch.params : {};
 }

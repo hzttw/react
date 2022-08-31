@@ -1,15 +1,5 @@
-import { Navigate, useLocation } from "react-router-dom";
 import "./App.css";
 import { AuthProvider, useAuth } from "./auth";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Outlet,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
 // import {
 //   BrowserRouter as Router,
 //   Routes,
@@ -18,7 +8,19 @@ import {
 //   Outlet,
 //   useNavigate,
 //   useParams,
-// } from "./mini-react-router";
+//   Navigate, useLocation
+// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Outlet,
+  Navigate,
+  useNavigate,
+  useParams,
+  useLocation
+} from "./mini-react-router";
 
 function App() {
   return (
@@ -105,7 +107,6 @@ function RequireAuth({ children }) {
 function User() {
   const auth = useAuth();
   const navigate = useNavigate();
-  console.log(auth);
   return (
     <div>
       <h1>User</h1>
