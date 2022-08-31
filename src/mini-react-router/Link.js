@@ -1,6 +1,6 @@
 import { useNavigate } from "./hooks";
 
-export default function Link({ to, children }) {
+export default function Link({ to, children ,...rest}) {
   const navigate = useNavigate()
   const handle = (e) => {
     //这里阻止原生事件，a标签的href 会刷新页面
@@ -9,7 +9,7 @@ export default function Link({ to, children }) {
     navigate(to)
   };
   return (
-    <a href={to} onClick={handle}>
+    <a href={to} onClick={handle} {...rest}>
       {children}
     </a>
   );

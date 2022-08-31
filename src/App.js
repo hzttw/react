@@ -9,7 +9,7 @@ import { AuthProvider, useAuth } from "./auth";
 //   Outlet,
 //   useNavigate,
 //   useParams,
-//   Navigate, useLocation
+//   Navigate, useLocation,useMatch, useResolvedPath
 // } from "react-router-dom";
 import {
   BrowserRouter as Router,
@@ -21,6 +21,7 @@ import {
   useNavigate,
   useParams,
   useLocation,
+  useMatch,useResolvedPath
 } from "./mini-react-router";
 // import About from "./pages/About";
 const About = React.lazy(() => import("./pages/About"));
@@ -64,14 +65,24 @@ function App() {
 
 export default App;
 
+function CustomLink({ to, ...rest }) {
+  const resovled = useResolvedPath(to)
+  console.log(resovled);
+  console.log(to);
+  const match = useMatch({ path: resovled.pathname, end: true });
+  return <Link to={to} {...rest} style={{ color: match ? "red" : "black" }} />;
+  // return(
+  //   <NavLink to={to} {...rest} style={({ isActive })=>({color: isActive ?'red':'black'})}/>
+  // )
+}
 function Layout(porps) {
   return (
     <div className="border">
-      <Link to="/">首页</Link>
-      <Link to="/product">商品</Link>
-      <Link to="/user">用户中心</Link>
-      <Link to="/login">登录</Link>
-      <Link to="/about">about</Link>
+      <CustomLink to="/">首页</CustomLink>
+      <CustomLink to="/product">商品</CustomLink>
+      <CustomLink to="/user">用户中心</CustomLink>
+      <CustomLink to="/login">登录</CustomLink>
+      <CustomLink to="/about">about</CustomLink>
       <Outlet></Outlet>
     </div>
   );
@@ -88,7 +99,7 @@ function Product() {
   return (
     <div>
       <h1>Product</h1>
-      <Link to="/product/123">商品</Link>
+      <CustomLink to="/product/123">商品</CustomLink>
       <Outlet></Outlet>
     </div>
   );
